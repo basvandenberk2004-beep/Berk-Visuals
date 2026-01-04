@@ -115,7 +115,7 @@ export default function HeroSection() {
             </motion.div>
           </motion.div>
 
-          {/* Right visual - Phone mockup */}
+          {/* Right visual - Phone mockup - FIXED VIDEO */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -126,16 +126,27 @@ export default function HeroSection() {
               {/* Phone frame */}
               <div className="relative w-56 sm:w-64 md:w-72 aspect-[9/19] bg-gradient-to-b from-gray-200 to-gray-300 rounded-[2.5rem] sm:rounded-[3rem] p-1.5 sm:p-2 shadow-2xl">
                 <div className="absolute top-3 sm:top-4 left-1/2 -translate-x-1/2 w-20 sm:w-24 h-5 sm:h-6 bg-gray-900 rounded-full z-20" />
+                
                 <div className="w-full h-full bg-black rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden relative">
-                  {/* YouTube Video Embed */}
-                  <iframe
-                    src="https://www.youtube.com/embed/RWpABvPCnmM?rel=0&modestbranding=1&controls=0&showinfo=0&autoplay=1&mute=1&loop=1&playlist=RWpABvPCnmM"
-                    title="Berk Visuals - Verticale video content voorbeeld"
-                    className="absolute inset-0 w-full h-full object-cover rounded-[inherit]"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    style={{ border: 'none' }}
-                    loading="eager"
-                  />
+                  {/* YouTube Video Container with Overlay */}
+                  <div className="absolute inset-0 w-full h-full">
+                    {/* Video scaled to cover entire area */}
+                    <iframe
+                      src="https://www.youtube.com/embed/RWpABvPCnmM?rel=0&modestbranding=1&controls=0&showinfo=0&autoplay=1&mute=1&loop=1&playlist=RWpABvPCnmM&disablekb=1&fs=0&iv_load_policy=3"
+                      title="Berk Visuals - Verticale video content voorbeeld"
+                      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.77%] h-[177.77%] pointer-events-none"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      style={{ border: 'none' }}
+                      loading="eager"
+                      tabIndex="-1"
+                    />
+                    
+                    {/* Transparent overlay to block YouTube UI */}
+                    <div className="absolute inset-0 z-10 pointer-events-auto cursor-default" 
+                         onClick={(e) => e.preventDefault()} 
+                         onMouseDown={(e) => e.preventDefault()} 
+                    />
+                  </div>
                 </div>
               </div>
 
