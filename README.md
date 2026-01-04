@@ -1,20 +1,13 @@
-# Base44 App
+# Berk Visuals Website
 
+Dit is de officiële website voor Berk Visuals - Videoproductie voor het MKB.
 
-This app was created automatically by Base44.
-It's a Vite+React app that communicates with the Base44 API.
+## Tech Stack
+Deze website is gebouwd met:
+- React
+- Vite
+- Tailwind CSS
+- Framer Motion
 
-## Running the app
-
-```bash
-npm install
-npm run dev
-```
-
-## Building the app
-
-```bash
-npm run build
-```
-
-For more information and support, please contact Base44 support at app@base44.com.
+## Status
+Live op: https://berkvisuals.nl
