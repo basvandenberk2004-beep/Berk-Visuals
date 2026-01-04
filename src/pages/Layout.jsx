@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
@@ -51,10 +50,10 @@ export default function Layout({ children, currentPageName }) {
             {/* Logo */}
             <Link to={createPageUrl('Home')} className="flex items-center gap-2 sm:gap-3 group">
               <img 
-  src="https://img.sanishtech.com/u/79902631170c4de75ad15182794b3ac1.png" 
-  alt="Berk Visuals Logo" 
-  className="w-10 h-10 sm:w-12 sm:h-12 object-contain rounded-xl transition-transform group-hover:scale-105"
-/>
+                src="https://img.sanishtech.com/u/79902631170c4de75ad15182794b3ac1.png" 
+                alt="Berk Visuals Logo" 
+                className="w-10 h-10 sm:w-12 sm:h-12 object-contain rounded-xl transition-transform group-hover:scale-105"
+              />
               <span className="font-bold text-gray-900 text-base sm:text-lg hidden xs:block">Berk Visuals</span>
             </Link>
 
@@ -65,12 +64,6 @@ export default function Layout({ children, currentPageName }) {
                 className="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium"
               >
                 Home
-              </button>
-              <button 
-                onClick={() => scrollToSection('pricing')}
-                className="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium"
-              >
-                Tarieven
               </button>
               <button 
                 onClick={() => scrollToSection('contact')}
@@ -115,12 +108,6 @@ export default function Layout({ children, currentPageName }) {
                   Home
                 </button>
                 <button 
-                  onClick={() => scrollToSection('pricing')}
-                  className="block w-full text-left text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors py-3 px-3 rounded-lg font-medium"
-                >
-                  Tarieven
-                </button>
-                <button 
                   onClick={() => scrollToSection('contact')}
                   className="block w-full text-left text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors py-3 px-3 rounded-lg font-medium"
                 >
@@ -146,6 +133,6 @@ export default function Layout({ children, currentPageName }) {
 
       {/* Cookie Consent Banner */}
       <CookieConsent onAccept={initGA} />
-      </div>
-      );
-      }
+    </div>
+  );
+}
