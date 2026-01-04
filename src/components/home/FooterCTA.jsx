@@ -5,9 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import { base44 } from '@/api/base44Client';
-import { toast } from 'sonner';
-import { trackEvent } from '@/components/analytics';
+import ReactGA from 'react-ga4';
 
 export default function FooterCTA() {
   const [formData, setFormData] = useState({
@@ -70,79 +68,64 @@ export default function FooterCTA() {
     }
 
     setIsSubmitting(true);
+    setErrors({});
 
     try {
-      await base44.entities.ContactSubmission.create({
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone || null,
-        company: formData.company || null,
-        message: formData.message,
-        status: 'new'
-      });
-
-      setSubmitSuccess(true);
-      trackEvent('Leads', 'submit_contact_form', formData.email);
-
-      // Send email notification to Bas (don't block form if this fails)
-      try {
-        const phoneText = formData.phone ? `Telefoon: ${formData.phone}` : '';
-        const companyText = formData.company ? `Bedrijf: ${formData.company}` : '';
-        
-        const emailBody = `
-<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; border: 1px solid #e5e7eb;">
-  <div style="background-color: #3B82F6; padding: 30px; text-align: center;">
-    <h1 style="color: #ffffff; margin: 0; font-size: 24px;">Nieuwe Contactaanvraag</h1>
-  </div>
-  
-  <div style="padding: 30px;">
-    <h2 style="color: #1f2937; font-size: 18px; margin-top: 0;">Contactgegevens</h2>
-    
-    <p style="margin: 10px 0; color: #374151;"><strong>Naam:</strong> ${formData.name}</p>
-    <p style="margin: 10px 0; color: #374151;"><strong>Email:</strong> ${formData.email}</p>
-    ${formData.phone ? `<p style="margin: 10px 0; color: #374151;"><strong>Telefoon:</strong> ${formData.phone}</p>` : ''}
-    ${formData.company ? `<p style="margin: 10px 0; color: #374151;"><strong>Bedrijf:</strong> ${formData.company}</p>` : ''}
-    
-    <div style="margin-top: 25px; padding: 20px; background-color: #f3f4f6; border-radius: 6px;">
-      <h3 style="color: #1f2937; font-size: 16px; margin-top: 0;">Bericht:</h3>
-      <p style="color: #374151; line-height: 1.6; white-space: pre-wrap;">${formData.message}</p>
-    </div>
-    
-    <div style="margin-top: 25px; text-align: center;">
-      <a href="mailto:${formData.email}" style="display: inline-block; background-color: #3B82F6; color: #ffffff; text-decoration: none; padding: 12px 24px; border-radius: 6px; font-weight: bold;">Reageer op aanvraag</a>
-    </div>
-  </div>
-  
-  <div style="background-color: #f9fafb; padding: 20px; text-align: center; border-top: 1px solid #e5e7eb;">
-    <p style="color: #6b7280; font-size: 12px; margin: 0;">Berk Visuals - Automatische notificatie</p>
-  </div>
-</div>
-        `;
-
-        await base44.integrations.Core.SendEmail({
-          from_name: 'Berk Visuals Website',
-          to: 'bas@berkvisuals.nl',
+      // Web3Forms API call
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: 'b16b6394-e361-4c64-8c7b-6899b9d506d7',
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone || 'Niet opgegeven',
+          company: formData.company || 'Niet opgegeven',
+          message: formData.message,
           subject: `Nieuwe aanvraag van ${formData.name}${formData.company ? ' (' + formData.company + ')' : ''}`,
-          body: emailBody
-        });
-        toast.success('Email notificatie verzonden naar bas@berkvisuals.nl');
-      } catch (emailError) {
-        console.error('Email failed, but form was submitted:', emailError);
-        toast.error(`Email notificatie kon niet worden verzonden: ${emailError.message || 'Onbekende fout'}`);
-      }
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        company: '',
-        message: ''
+          from_name: 'Berk Visuals Website'
+        })
       });
 
-      setTimeout(() => {
-        setSubmitSuccess(false);
-      }, 5000);
+      const data = await response.json();
+
+      if (data.success) {
+        // Success! Fire GA4 event and show success message
+        setSubmitSuccess(true);
+        
+        // Track conversion in Google Analytics
+        const consent = localStorage.getItem('ga_cookie_consent');
+        if (consent === 'accepted') {
+          ReactGA.event({
+            category: 'Leads',
+            action: 'submit_contact_form',
+            label: formData.email
+          });
+        }
+
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          company: '',
+          message: ''
+        });
+
+        // Hide success message after 5 seconds
+        setTimeout(() => {
+          setSubmitSuccess(false);
+        }, 5000);
+      } else {
+        throw new Error(data.message || 'Er ging iets mis');
+      }
     } catch (error) {
-      setErrors({ submit: 'Er ging iets mis. Probeer het opnieuw of stuur een email naar bas@berkvisuals.nl' });
+      console.error('Form submission error:', error);
+      setErrors({ 
+        submit: error.message || 'Er ging iets mis bij het versturen. Probeer het opnieuw of stuur een email naar bas@berkvisuals.nl' 
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -212,6 +195,7 @@ export default function FooterCTA() {
                       className={`bg-white border-gray-300 text-gray-900 placeholder:text-gray-400 focus:border-blue-500 ${
                         errors.name ? 'border-red-500' : ''
                       }`}
+                      disabled={isSubmitting}
                     />
                     {errors.name && (
                       <p className="text-red-500 text-sm mt-1">{errors.name}</p>
@@ -233,6 +217,7 @@ export default function FooterCTA() {
                       className={`bg-white border-gray-300 text-gray-900 placeholder:text-gray-400 focus:border-blue-500 ${
                         errors.email ? 'border-red-500' : ''
                       }`}
+                      disabled={isSubmitting}
                     />
                     {errors.email && (
                       <p className="text-red-500 text-sm mt-1">{errors.email}</p>
@@ -254,6 +239,7 @@ export default function FooterCTA() {
                       className={`bg-white border-gray-300 text-gray-900 placeholder:text-gray-400 focus:border-blue-500 ${
                         errors.phone ? 'border-red-500' : ''
                       }`}
+                      disabled={isSubmitting}
                     />
                     {errors.phone && (
                       <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
@@ -272,6 +258,7 @@ export default function FooterCTA() {
                       onChange={handleChange}
                       placeholder="Jouw bedrijf"
                       className="bg-white border-gray-300 text-gray-900 placeholder:text-gray-400 focus:border-blue-500"
+                      disabled={isSubmitting}
                     />
                   </div>
                 </div>
@@ -291,6 +278,7 @@ export default function FooterCTA() {
                     className={`bg-white border-gray-300 text-gray-900 placeholder:text-gray-400 focus:border-blue-500 resize-none text-sm sm:text-base ${
                       errors.message ? 'border-red-500' : ''
                     }`}
+                    disabled={isSubmitting}
                   />
                   {errors.message && (
                     <p className="text-red-500 text-sm mt-1">{errors.message}</p>
@@ -372,7 +360,6 @@ export default function FooterCTA() {
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="text-gray-600 hover:text-blue-600 transition-colors"
-                onClick={() => trackEvent('Social', 'click_social_link', 'Instagram')}
               >
                 <Instagram className="w-5 h-5" />
               </a>
@@ -381,7 +368,6 @@ export default function FooterCTA() {
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="text-gray-600 hover:text-blue-600 transition-colors"
-                onClick={() => trackEvent('Social', 'click_social_link', 'LinkedIn')}
               >
                 <Linkedin className="w-5 h-5" />
               </a>
