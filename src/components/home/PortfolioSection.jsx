@@ -250,16 +250,20 @@ export default function PortfolioSection() {
             <ChevronRight className="w-6 h-6 text-gray-900" />
           </button>
 
-          {/* Embla Carousel with Fixed Spacing (px-4 added here) */}
+          {/* Embla Carousel FIX: 
+              1. Removed 'gap-6' 
+              2. Added '-ml-6' to container 
+          */}
           <div className="overflow-hidden px-4" ref={emblaRef}>
-            <div className="flex gap-6">
+            <div className="flex -ml-6">
               {infiniteItems.map((item, index) => {
                 const PlatformIcon = platformIcons[item.platform];
                 
                 return (
+                  // FIX: Added 'pl-6' here instead of gap
                   <div
                     key={`${item.id}-${index}`}
-                    className="flex-[0_0_auto] w-[280px] sm:w-[320px]"
+                    className="flex-[0_0_auto] w-[280px] sm:w-[320px] pl-6"
                   >
                     <motion.div
                       initial={{ opacity: 0, y: 30 }}
