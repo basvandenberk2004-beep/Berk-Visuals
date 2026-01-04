@@ -250,8 +250,8 @@ export default function PortfolioSection() {
             <ChevronRight className="w-6 h-6 text-gray-900" />
           </button>
 
-          {/* Embla Carousel */}
-          <div className="overflow-hidden" ref={emblaRef}>
+          {/* Embla Carousel with Fixed Spacing (px-4 added here) */}
+          <div className="overflow-hidden px-4" ref={emblaRef}>
             <div className="flex gap-6">
               {infiniteItems.map((item, index) => {
                 const PlatformIcon = platformIcons[item.platform];
