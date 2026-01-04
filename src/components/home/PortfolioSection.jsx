@@ -236,7 +236,7 @@ export default function PortfolioSection() {
           {/* Navigation Buttons */}
           <button
             onClick={scrollPrev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-xl border border-gray-200 flex items-center justify-center hover:bg-white transition-all hover:scale-110"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-xl border border-gray-200 flex items-center justify-center hover:bg-white transition-all hover:scale-110"
             aria-label="Previous"
           >
             <ChevronLeft className="w-6 h-6 text-gray-900" />
@@ -244,23 +244,22 @@ export default function PortfolioSection() {
 
           <button
             onClick={scrollNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-xl border border-gray-200 flex items-center justify-center hover:bg-white transition-all hover:scale-110"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-xl border border-gray-200 flex items-center justify-center hover:bg-white transition-all hover:scale-110"
             aria-label="Next"
           >
             <ChevronRight className="w-6 h-6 text-gray-900" />
           </button>
 
-          {/* Embla Carousel FIX: 
-              1. Removed 'gap-6' 
-              2. Added '-ml-6' to container 
+          {/* FIXED CONTAINER: 
+             Added 'py-12' and '-my-12' to create vertical space inside the overflow container
+             so shadows and transform-y don't get clipped.
           */}
-          <div className="overflow-hidden px-4" ref={emblaRef}>
+          <div className="overflow-hidden px-4 py-12 -my-12" ref={emblaRef}>
             <div className="flex -ml-6">
               {infiniteItems.map((item, index) => {
                 const PlatformIcon = platformIcons[item.platform];
                 
                 return (
-                  // FIX: Added 'pl-6' here instead of gap
                   <div
                     key={`${item.id}-${index}`}
                     className="flex-[0_0_auto] w-[280px] sm:w-[320px] pl-6"
@@ -270,12 +269,14 @@ export default function PortfolioSection() {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.6 }}
-                      className="group relative cursor-pointer h-full"
+                      // ADDED: group class for hover states, z-index management, and negative translate on wrapper
+                      className="group relative cursor-pointer h-full hover:z-10 transition-all duration-300 hover:-translate-y-2"
                       onClick={() => {
                         trackEvent('Portfolio', 'view_case_study', item.client);
                         setSelectedItem(item);
                       }}
                     >
+                      {/* Removed hover:-translate-y-1 from inner card, moved to wrapper above */}
                       <div className="relative h-full rounded-2xl overflow-hidden bg-white border border-gray-200 hover:border-gray-300 hover:shadow-2xl transition-all duration-300">
                         {/* 9:16 Aspect Ratio Thumbnail */}
                         <div className="relative aspect-[9/16] overflow-hidden bg-gray-100">
