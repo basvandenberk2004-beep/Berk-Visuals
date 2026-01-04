@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom'; // AANGEPAST: Hooks toegevoegd
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronRight } from 'lucide-react';
@@ -12,7 +12,6 @@ export default function Layout({ children, currentPageName }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   
-  // AANGEPAST: Hooks initialiseren
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -26,15 +25,13 @@ export default function Layout({ children, currentPageName }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // AANGEPAST: Verbeterde scroll functie
-  const handleNavigation = (id) => {
-    setMobileMenuOpen(false); // Sluit menu direct
-
-    // Helper functie om te scrollen met offset voor de header
-    const scrollToElement = () => {
+  // AANGEPAST: Functie accepteert nu 'isMobile' parameter
+  const handleNavigation = (id, isMobile = false) => {
+    // Helper functie die het echte scrollwerk doet
+    const performScroll = () => {
       const element = document.getElementById(id);
       if (element) {
-        const headerOffset = 80; // Ruimte voor de vaste menubalk
+        const headerOffset = 80;
         const elementPosition = element.getBoundingClientRect().top;
         const offsetPosition = elementPosition + window.scrollY - headerOffset;
   
@@ -45,28 +42,46 @@ export default function Layout({ children, currentPageName }) {
       }
     };
 
-    // Check of we op de homepagina zijn ('/')
+    // Stap 1: Sluit menu als het mobiel is
+    if (isMobile) {
+      setMobileMenuOpen(false);
+    }
+
+    // Stap 2: Navigatie logica met vertraging voor mobiel
     if (location.pathname !== '/') {
-      navigate('/'); // Navigeer eerst naar home
-      // Wacht kort tot de pagina geladen is en scroll dan
-      setTimeout(scrollToElement, 300);
+      navigate('/');
+      // Als we van pagina wisselen, geef de browser tijd om te laden (300ms)
+      setTimeout(performScroll, 300);
     } else {
-      // We zijn al op home, scroll direct
-      scrollToElement();
+      // Als we al op home zijn:
+      if (isMobile) {
+        // BELANGRIJK: Wacht 150ms op mobiel zodat het menu kan sluiten VOORDAT we scrollen
+        setTimeout(performScroll, 150);
+      } else {
+        // Op desktop: direct scrollen
+        performScroll();
+      }
     }
   };
 
-  const handleHomeClick = () => {
-    setMobileMenuOpen(false);
+  const handleHomeClick = (isMobile = false) => {
+    if (isMobile) setMobileMenuOpen(false);
+    
     if (location.pathname !== '/') {
         navigate('/');
     }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    // Zelfde logica: kleine delay op mobiel om glitches te voorkomen
+    if (isMobile) {
+        setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 150);
+    } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
-  const handleIntakeClick = (source) => {
+  const handleIntakeClick = (source, isMobile = false) => {
     trackEvent('Conversion', 'click_intake_request', source);
-    handleNavigation('contact'); // Gebruik nieuwe functie
+    handleNavigation('contact', isMobile);
   };
 
   return (
@@ -79,7 +94,7 @@ export default function Layout({ children, currentPageName }) {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled 
             ? 'bg-white/95 backdrop-blur-xl border-b border-gray-200 shadow-sm' 
-            : 'bg-white/50 backdrop-blur-sm' // AANGEPAST: Iets achtergrond op mobiel zodat tekst leesbaar blijft
+            : 'bg-white/50 backdrop-blur-sm'
         }`}
       >
         <div className="max-w-7xl mx-auto px-3 sm:px-6">
@@ -94,22 +109,22 @@ export default function Layout({ children, currentPageName }) {
               <span className="font-bold text-gray-900 text-base sm:text-lg hidden xs:block">Berk Visuals</span>
             </Link>
 
-            {/* Desktop Navigation */}
+            {/* Desktop Navigation (Geen delay nodig) */}
             <div className="hidden md:flex items-center gap-4 lg:gap-8">
               <button 
-                onClick={handleHomeClick}
+                onClick={() => handleHomeClick(false)}
                 className="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium"
               >
                 Home
               </button>
               <button 
-                onClick={() => handleNavigation('portfolio')}
+                onClick={() => handleNavigation('portfolio', false)}
                 className="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium"
               >
                 Portfolio
               </button>
               <Button
-                onClick={() => handleIntakeClick('Nav')}
+                onClick={() => handleIntakeClick('Nav', false)}
                 className="bg-blue-500 hover:bg-blue-600 text-white font-medium px-4 lg:px-6 py-2 rounded-xl shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 transition-all text-sm"
               >
                 Gratis intake
@@ -120,7 +135,7 @@ export default function Layout({ children, currentPageName }) {
             {/* Mobile menu button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-1.5 text-gray-600 hover:text-gray-900 transition-colors rounded-lg hover:bg-gray-100 z-50 relative" // AANGEPAST: z-50 toegevoegd
+              className="md:hidden p-1.5 text-gray-600 hover:text-gray-900 transition-colors rounded-lg hover:bg-gray-100 z-50 relative"
               aria-label={mobileMenuOpen ? "Sluit menu" : "Open menu"}
             >
               {mobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}
@@ -136,23 +151,26 @@ export default function Layout({ children, currentPageName }) {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="md:hidden bg-white border-b border-gray-200 shadow-lg absolute top-16 left-0 right-0 w-full z-40" // AANGEPAST: absolute positioning en z-index
+              className="md:hidden bg-white border-b border-gray-200 shadow-lg absolute top-16 left-0 right-0 w-full z-40"
             >
+              {/* AANGEPAST: We geven nu 'true' mee aan de functies om aan te geven dat het mobiel is */}
               <div className="px-3 sm:px-4 py-4 sm:py-6 space-y-3">
                 <button 
-                  onClick={handleHomeClick}
+                  type="button"
+                  onClick={() => handleHomeClick(true)} 
                   className="block w-full text-left text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors py-3 px-3 rounded-lg font-medium"
                 >
                   Home
                 </button>
                 <button 
-                  onClick={() => handleNavigation('portfolio')}
+                  type="button"
+                  onClick={() => handleNavigation('portfolio', true)}
                   className="block w-full text-left text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors py-3 px-3 rounded-lg font-medium"
                 >
                   Portfolio
                 </button>
                 <Button
-                  onClick={() => handleIntakeClick('Nav')}
+                  onClick={() => handleIntakeClick('Nav', true)}
                   className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-3.5 rounded-xl shadow-lg shadow-blue-500/30 mt-2"
                 >
                   Gratis intake
