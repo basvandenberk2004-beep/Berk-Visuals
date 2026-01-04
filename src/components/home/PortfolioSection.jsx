@@ -232,7 +232,8 @@ export default function PortfolioSection() {
         </motion.div>
 
         {/* Carousel Container */}
-        <div className="relative">
+        {/* AANGEPAST: z-10 toegevoegd voor layering */}
+        <div className="relative z-10">
           {/* Navigation Buttons */}
           <button
             onClick={scrollPrev}
@@ -250,11 +251,12 @@ export default function PortfolioSection() {
             <ChevronRight className="w-6 h-6 text-gray-900" />
           </button>
 
-          {/* FIXED CONTAINER: 
-             Added 'py-12' and '-my-12' to create vertical space inside the overflow container
-             so shadows and transform-y don't get clipped.
+          {/* AANGEPAST: 
+              - pt-12 (padding top)
+              - pb-32 (VEEL padding bottom voor de schaduw) 
+              - -mb-24 (negatieve margin om het gat weer te dichten)
           */}
-          <div className="overflow-hidden px-4 py-12 -my-12" ref={emblaRef}>
+          <div className="overflow-hidden px-4 pt-12 pb-32 -mb-24" ref={emblaRef}>
             <div className="flex -ml-6">
               {infiniteItems.map((item, index) => {
                 const PlatformIcon = platformIcons[item.platform];
@@ -269,15 +271,15 @@ export default function PortfolioSection() {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.6 }}
-                      // ADDED: group class for hover states, z-index management, and negative translate on wrapper
-                      className="group relative cursor-pointer h-full hover:z-10 transition-all duration-300 hover:-translate-y-2"
+                      /* AANGEPAST: hover translate en z-index op de wrapper */
+                      className="group relative cursor-pointer h-full hover:z-20 transition-all duration-300 hover:-translate-y-4"
                       onClick={() => {
                         trackEvent('Portfolio', 'view_case_study', item.client);
                         setSelectedItem(item);
                       }}
                     >
-                      {/* Removed hover:-translate-y-1 from inner card, moved to wrapper above */}
-                      <div className="relative h-full rounded-2xl overflow-hidden bg-white border border-gray-200 hover:border-gray-300 hover:shadow-2xl transition-all duration-300">
+                      {/* AANGEPAST:Specifieke schaduw toegevoegd */}
+                      <div className="relative h-full rounded-2xl overflow-hidden bg-white border border-gray-200 hover:border-gray-300 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.2)] transition-all duration-300">
                         {/* 9:16 Aspect Ratio Thumbnail */}
                         <div className="relative aspect-[9/16] overflow-hidden bg-gray-100">
                           <img 
