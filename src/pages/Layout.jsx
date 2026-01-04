@@ -50,9 +50,11 @@ export default function Layout({ children, currentPageName }) {
           <div className="flex items-center justify-between h-16 sm:h-20">
             {/* Logo */}
             <Link to={createPageUrl('Home')} className="flex items-center gap-2 sm:gap-3 group">
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center transition-transform group-hover:scale-105 shadow-lg shadow-blue-500/30">
-                <span className="text-base sm:text-lg font-bold text-white">B</span>
-              </div>
+              <img 
+  src="https://img.sanishtech.com/u/79902631170c4de75ad15182794b3ac1.png" 
+  alt="Berk Visuals Logo" 
+  className="w-10 h-10 sm:w-12 sm:h-12 object-contain rounded-xl transition-transform group-hover:scale-105"
+/>
               <span className="font-bold text-gray-900 text-base sm:text-lg hidden xs:block">Berk Visuals</span>
             </Link>
 
