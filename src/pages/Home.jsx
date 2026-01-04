@@ -4,7 +4,6 @@ import ProblemSection from '@/components/home/ProblemSection';
 import SolutionSection from '@/components/home/SolutionSection';
 import PortfolioSection from '@/components/home/PortfolioSection';
 import TestimonialsSection from '@/components/home/TestimonialsSection';
-import PricingSection from '@/components/home/PricingSection';
 import AboutSection from '@/components/home/AboutSection';
 import FooterCTA from '@/components/home/FooterCTA';
 
@@ -152,7 +151,6 @@ export default function Home() {
       <SolutionSection />
       <PortfolioSection />
       <TestimonialsSection />
-      <PricingSection />
       <AboutSection />
       <FooterCTA />
     </div>
