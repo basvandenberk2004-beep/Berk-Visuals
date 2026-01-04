@@ -11,7 +11,7 @@ import { usePageTracking } from '@/components/usePageTracking';
 export default function Layout({ children, currentPageName }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  
+   
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -25,16 +25,22 @@ export default function Layout({ children, currentPageName }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // AANGEPAST: Functie accepteert nu 'isMobile' parameter
+  // AANGEPAST: De "Slimme" Navigatie Functie
   const handleNavigation = (id, isMobile = false) => {
-    // Helper functie die het echte scrollwerk doet
-    const performScroll = () => {
+    // Stap 1: Sluit menu direct als het mobiel is
+    if (isMobile) {
+      setMobileMenuOpen(false);
+    }
+
+    // Deze functie voert het scrollen pas uit als hij wordt aangeroepen
+    const executeScroll = () => {
       const element = document.getElementById(id);
       if (element) {
         const headerOffset = 80;
+        // BELANGRIJK: We berekenen de positie NU pas, na de wachttijd
         const elementPosition = element.getBoundingClientRect().top;
         const offsetPosition = elementPosition + window.scrollY - headerOffset;
-  
+   
         window.scrollTo({
           top: offsetPosition,
           behavior: "smooth"
@@ -42,24 +48,19 @@ export default function Layout({ children, currentPageName }) {
       }
     };
 
-    // Stap 1: Sluit menu als het mobiel is
-    if (isMobile) {
-      setMobileMenuOpen(false);
-    }
-
-    // Stap 2: Navigatie logica met vertraging voor mobiel
+    // Stap 2: De routering en timing logica
     if (location.pathname !== '/') {
       navigate('/');
-      // Als we van pagina wisselen, geef de browser tijd om te laden (300ms)
-      setTimeout(performScroll, 300);
+      // Als we van pagina wisselen: wacht 500ms tot de nieuwe pagina geladen is
+      setTimeout(executeScroll, 500);
     } else {
       // Als we al op home zijn:
       if (isMobile) {
-        // BELANGRIJK: Wacht 150ms op mobiel zodat het menu kan sluiten VOORDAT we scrollen
-        setTimeout(performScroll, 150);
+        // Op mobiel: Wacht 300ms tot de menu-animatie KLAAR is, dan pas berekenen en scrollen
+        setTimeout(executeScroll, 300);
       } else {
         // Op desktop: direct scrollen
-        performScroll();
+        executeScroll();
       }
     }
   };
@@ -69,13 +70,16 @@ export default function Layout({ children, currentPageName }) {
     
     if (location.pathname !== '/') {
         navigate('/');
-    }
-    
-    // Zelfde logica: kleine delay op mobiel om glitches te voorkomen
-    if (isMobile) {
-        setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 150);
+        // Na navigeren even wachten met naar boven scrollen
+        setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 100);
     } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        // Als we al op home zijn
+        if (isMobile) {
+            // Wacht tot menu dicht is (300ms) voordat we naar boven scrollen
+            setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 300);
+        } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
     }
   };
 
@@ -109,7 +113,7 @@ export default function Layout({ children, currentPageName }) {
               <span className="font-bold text-gray-900 text-base sm:text-lg hidden xs:block">Berk Visuals</span>
             </Link>
 
-            {/* Desktop Navigation (Geen delay nodig) */}
+            {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-4 lg:gap-8">
               <button 
                 onClick={() => handleHomeClick(false)}
@@ -153,7 +157,6 @@ export default function Layout({ children, currentPageName }) {
               transition={{ duration: 0.3 }}
               className="md:hidden bg-white border-b border-gray-200 shadow-lg absolute top-16 left-0 right-0 w-full z-40"
             >
-              {/* AANGEPAST: We geven nu 'true' mee aan de functies om aan te geven dat het mobiel is */}
               <div className="px-3 sm:px-4 py-4 sm:py-6 space-y-3">
                 <button 
                   type="button"
