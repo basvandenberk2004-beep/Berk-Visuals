@@ -378,10 +378,11 @@ export default function FooterCTA() {
         <div className="mt-16 pt-8 border-t border-gray-200">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
+              {/* LOGO AANGEPAST: schaduw is weggehaald */}
               <img 
                 src="https://img.sanishtech.com/u/79902631170c4de75ad15182794b3ac1.png" 
                 alt="Berk Visuals Logo" 
-                className="w-12 h-12 object-contain rounded-xl shadow-lg"
+                className="w-12 h-12 object-contain rounded-xl"
               />
               <div>
                 <span className="font-bold text-gray-900">Berk Visuals</span>
