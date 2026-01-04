@@ -66,10 +66,10 @@ export default function Layout({ children, currentPageName }) {
                 Home
               </button>
               <button 
-                onClick={() => scrollToSection('contact')}
+                onClick={() => scrollToSection('portfolio')}
                 className="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium"
               >
-                Contact
+                Portfolio
               </button>
               <Button
                 onClick={() => handleIntakeClick('Nav')}
@@ -108,10 +108,10 @@ export default function Layout({ children, currentPageName }) {
                   Home
                 </button>
                 <button 
-                  onClick={() => scrollToSection('contact')}
+                  onClick={() => scrollToSection('portfolio')}
                   className="block w-full text-left text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors py-3 px-3 rounded-lg font-medium"
                 >
-                  Contact
+                  Portfolio
                 </button>
                 <Button
                   onClick={() => handleIntakeClick('Nav')}
