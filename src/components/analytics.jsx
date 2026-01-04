@@ -1,10 +1,11 @@
+
 import ReactGA from 'react-ga4';
 
 let isInitialized = false;
 
 export const initGA = () => {
   if (!isInitialized) {
-    ReactGA.initialize('G-XXXXXXXXXX');
+    ReactGA.initialize('G-NGVQCJT4X9');
     isInitialized = true;
   }
 };
