@@ -66,11 +66,11 @@ export default function HeroSection() {
                 variant="outline"
                 className="border-gray-300 bg-white hover:bg-gray-50 text-gray-900 font-semibold px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg rounded-xl transition-all w-full sm:w-auto"
                 onClick={() => {
-                  trackEvent('Interest', 'click_view_pricing', 'Hero');
-                  document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
+                  trackEvent('Interest', 'click_view_portfolio', 'Hero');
+                  document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' });
                 }}
               >
-                Bekijk de tarieven
+                Bekijk mijn werk
               </Button>
             </div>
 
