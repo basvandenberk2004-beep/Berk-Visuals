@@ -378,9 +378,11 @@ export default function FooterCTA() {
         <div className="mt-16 pt-8 border-t border-gray-200">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-blue-500/30">
-                <span className="text-lg font-bold text-white">B</span>
-              </div>
+              <img 
+                src="https://img.sanishtech.com/u/79902631170c4de75ad15182794b3ac1.png" 
+                alt="Berk Visuals Logo" 
+                className="w-12 h-12 object-contain rounded-xl shadow-lg"
+              />
               <div>
                 <span className="font-bold text-gray-900">Berk Visuals</span>
                 <p className="text-xs text-gray-500">by Bas van den Berk</p>
