@@ -8,7 +8,7 @@ export default function SEO({
   title = "Berk Visuals - Videoproductie Heusden",
   description = "Professionele videoproductie in Heusden",
   keywords = "videoproductie Heusden, video maken, TikTok, Instagram Reels",
-  ogImage = "https://i.postimg.cc/sgFvPPHL/1.png",
+  ogImage = "https://img.sanishtech.com/u/79902631170c4de75ad15182794b3ac1.png",
   schema = null,
   canonical = null
 }) {
