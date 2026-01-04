@@ -58,7 +58,8 @@ const testimonials = [
 
 function TestimonialCard({ testimonial }) {
   return (
-    <div className="inline-block w-[550px] flex-shrink-0 mx-4">
+    // Added pb-2 to wrapper to help with shadow rendering
+    <div className="inline-block w-[550px] flex-shrink-0 mx-4 pb-2">
       <div className="h-[240px] p-8 rounded-2xl bg-white border border-gray-200 shadow-lg flex flex-row gap-8 items-center">
         {/* Left: Avatar */}
         <div className="flex-shrink-0">
@@ -132,12 +133,13 @@ export default function TestimonialsSection() {
           </p>
         </motion.div>
 
-        {/* Auto-scrolling Marquee */}
-        <div className="relative overflow-hidden">
+        {/* Auto-scrolling Marquee - FIXED SHADOW CLIPPING */}
+        {/* Added py-12 to create vertical space inside the overflow container so shadows are visible */}
+        <div className="relative overflow-hidden py-12">
           <motion.div
             className="flex gap-0"
             animate={{
-              x: [0, -1 * (testimonials.length * 582)], // 550px width + 32px margin (mx-4 = 16px left + 16px right)
+              x: [0, -1 * (testimonials.length * 582)], // 550px width + 32px margin
             }}
             transition={{
               x: {
