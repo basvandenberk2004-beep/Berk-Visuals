@@ -380,7 +380,7 @@ export default function FooterCTA() {
             <div className="flex items-center gap-3">
               {/* LOGO AANGEPAST: schaduw is weggehaald */}
               <img 
-                src="https://img.sanishtech.com/u/79902631170c4de75ad15182794b3ac1.png" 
+                src="https://i.postimg.cc/YSCWbhw2/video-camera-2806-(2).png" 
                 alt="Berk Visuals Logo" 
                 className="w-12 h-12 object-contain rounded-xl"
               />
