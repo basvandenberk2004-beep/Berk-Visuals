@@ -115,7 +115,7 @@ export default function HeroSection() {
             </motion.div>
           </motion.div>
 
-          {/* Right visual - Phone mockup - AANGEPAST */}
+          {/* Right visual - Phone mockup */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -129,20 +129,19 @@ export default function HeroSection() {
                 
                 <div className="w-full h-full bg-black rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden relative">
                   
-                  {/* NIEUWE CODE: Video container with proper aspect ratio */}
+                  {/* Video container */}
                   <div className="absolute inset-0 w-full h-full flex items-center justify-center bg-black">
-                    {/* Video with correct fit - showing full width */}
+                    {/* AANGEPAST: Subtiele 'scale-[1.05]' toegevoegd om de YouTube UI te verbergen */}
                     <iframe
                       src="https://www.youtube.com/embed/RWpABvPCnmM?rel=0&modestbranding=1&controls=0&showinfo=0&autoplay=1&mute=1&loop=1&playlist=RWpABvPCnmM&disablekb=1&fs=0&iv_load_policy=3"
                       title="Berk Visuals - Verticale video content voorbeeld"
-                      className="w-full h-full pointer-events-none"
+                      className="w-full h-full pointer-events-none scale-[1.05]"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       style={{ border: 'none' }}
                       loading="eager"
                       tabIndex="-1"
                     />
                   </div>
-                  {/* EINDE NIEUWE CODE */}
 
                 </div>
               </div>
