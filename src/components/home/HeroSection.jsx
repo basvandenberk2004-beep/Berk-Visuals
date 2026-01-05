@@ -115,7 +115,7 @@ export default function HeroSection() {
             </motion.div>
           </motion.div>
 
-          {/* Right visual - Phone mockup - AANGEPAST */}
+          {/* Right visual - Phone mockup */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -129,7 +129,8 @@ export default function HeroSection() {
                 
                 <div className="w-full h-full bg-black rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden relative">
                   
-                  {/* NIEUWE CODE: Video container with proper aspect ratio */}
+                  {/* NIEUWE CODE INGEVOEGD */}
+                  {/* Video container with proper aspect ratio */}
                   <div className="absolute inset-0 w-full h-full flex items-center justify-center bg-black">
                     {/* Video with correct fit - showing full width */}
                     <iframe
