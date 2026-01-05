@@ -106,7 +106,7 @@ export default function Layout({ children, currentPageName }) {
             {/* Logo */}
             <Link to={createPageUrl('Home')} className="flex items-center gap-2 sm:gap-3 group">
               <img 
-                src="https://img.sanishtech.com/u/79902631170c4de75ad15182794b3ac1.png" 
+                src="https://i.postimg.cc/YSCWbhw2/video-camera-2806-(2).png" 
                 alt="Berk Visuals Logo" 
                 className="w-10 h-10 sm:w-12 sm:h-12 object-contain rounded-xl transition-transform group-hover:scale-105"
               />
