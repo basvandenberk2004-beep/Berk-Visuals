@@ -375,10 +375,10 @@ export default function FooterCTA() {
           </div>
         </motion.div>
 
+        {/* UPDATED FOOTER SECTION START */}
         <div className="mt-16 pt-8 border-t border-gray-200">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              {/* LOGO AANGEPAST: schaduw is weggehaald */}
               <img 
                 src="https://i.postimg.cc/YSCWbhw2/video-camera-2806-(2).png" 
                 alt="Berk Visuals Logo" 
@@ -390,11 +390,25 @@ export default function FooterCTA() {
               </div>
             </div>
 
-            <p className="text-sm text-gray-500">
-              © {new Date().getFullYear()} Berk Visuals. Alle rechten voorbehouden.
-            </p>
+            <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-6">
+              <a 
+                href="tel:+31611497152" 
+                className="text-sm text-gray-500 hover:text-blue-600 transition-colors"
+              >
+                +31 6 11497152
+              </a>
+              <span className="hidden sm:inline text-gray-300">|</span>
+              <p className="text-sm text-gray-500">
+                KVK: 86119729
+              </p>
+            </div>
           </div>
+          
+          <p className="text-sm text-gray-500 text-center mt-4">
+            © {new Date().getFullYear()} Berk Visuals. Alle rechten voorbehouden.
+          </p>
         </div>
+        {/* UPDATED FOOTER SECTION END */}
       </div>
     </footer>
   );
