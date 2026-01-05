@@ -115,7 +115,7 @@ export default function HeroSection() {
             </motion.div>
           </motion.div>
 
-          {/* Right visual - Phone mockup - FIXED VIDEO */}
+          {/* Right visual - Phone mockup - AANGEPAST */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -128,25 +128,22 @@ export default function HeroSection() {
                 <div className="absolute top-3 sm:top-4 left-1/2 -translate-x-1/2 w-20 sm:w-24 h-5 sm:h-6 bg-gray-900 rounded-full z-20" />
                 
                 <div className="w-full h-full bg-black rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden relative">
-                  {/* YouTube Video Container with Overlay */}
-                  <div className="absolute inset-0 w-full h-full">
-                    {/* Video scaled to cover entire area */}
+                  
+                  {/* NIEUWE CODE: Video container with proper aspect ratio */}
+                  <div className="absolute inset-0 w-full h-full flex items-center justify-center bg-black">
+                    {/* Video with correct fit - showing full width */}
                     <iframe
                       src="https://www.youtube.com/embed/RWpABvPCnmM?rel=0&modestbranding=1&controls=0&showinfo=0&autoplay=1&mute=1&loop=1&playlist=RWpABvPCnmM&disablekb=1&fs=0&iv_load_policy=3"
                       title="Berk Visuals - Verticale video content voorbeeld"
-                      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.77%] h-[177.77%] pointer-events-none"
+                      className="w-full h-full pointer-events-none"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       style={{ border: 'none' }}
                       loading="eager"
                       tabIndex="-1"
                     />
-                    
-                    {/* Transparent overlay to block YouTube UI */}
-                    <div className="absolute inset-0 z-10 pointer-events-auto cursor-default" 
-                         onClick={(e) => e.preventDefault()} 
-                         onMouseDown={(e) => e.preventDefault()} 
-                    />
                   </div>
+                  {/* EINDE NIEUWE CODE */}
+
                 </div>
               </div>
 
