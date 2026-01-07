@@ -46,13 +46,13 @@ const testimonials = [
   },
   {
     id: 5,
-    quote: "Ik wilde mijn kapsalon moderniseren en jongere klanten aantrekken. Bas maakte video's die mijn werk laten zien op een manier die perfect aansluit bij mijn doelgroep. Ik krijg nu wekelijks nieuwe boekingen via Instagram.",
-    name: "Sophie Bakker",
-    company: "Style & Shine",
-    role: "Eigenaar",
-    image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop&crop=faces",
+    quote: "DMP Heusden is een lokale politieke partij. Samen met Bas hebben we voor DMP Heusden een campagne opgezet om meer zichtbaarheid te creëren. Door de video’s van Bas hebben we verschillende doelgroepen kunnen laten zien waar DMP echt voor staat. Bas levert kwaliteit en denkt mee over de aanpak en inhoud van de filmpjes. Voor ons een topresultaat, de doelen zijn behaald.",
+    name: "Martijn van Esch",
+    company: "DMP Heusden",
+    role: "Fractievoorzitter DMP",
+    image: "https://i.postimg.cc/fLSVh4bh/Martijn-van-Esch.webp",
     rating: 5,
-    results: "Wekelijkse boekingen via Instagram"
+    results: "Meer zichtbaarheid in Gemeente Heusden"
   }
 ];
 
