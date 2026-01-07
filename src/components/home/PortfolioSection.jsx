@@ -226,7 +226,7 @@ export default function PortfolioSection() {
             </span>
           </h2>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-            Van lokale bakkerijen tot sportscholen — bekijk hoe ik MKB-bedrijven 
+            Van lokale sportschool tot corporate recruitement — bekijk hoe ik MKB-bedrijven 
             help om zichtbaar te worden met video content die converteert.
           </p>
         </motion.div>
