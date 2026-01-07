@@ -1,6 +1,6 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Quote, Star, ArrowRight, TrendingUp } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Quote, Star, ArrowRight, TrendingUp, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const testimonials = [
@@ -46,7 +46,7 @@ const testimonials = [
   },
   {
     id: 5,
-    quote: "DMP Heusden is een lokale politieke partij. Samen met Bas hebben we voor DMP Heusden een campagne opgezet om meer zichtbaarheid te creëren. Door de video’s van Bas hebben we verschillende doelgroepen kunnen laten zien waar DMP echt voor staat. Bas levert kwaliteit en denkt mee over de aanpak en inhoud van de filmpjes. Voor ons een topresultaat, de doelen zijn behaald.",
+    quote: "DMP Heusden is een lokale politieke partij. Samen met Bas hebben we voor DMP Heusden een campagne opgezet om meer zichtbaarheid te creëren. Door de video's van Bas hebben we verschillende doelgroepen kunnen laten zien waar DMP echt voor staat. Bas levert kwaliteit en denkt mee over de aanpak en inhoud van de filmpjes. Voor ons een topresultaat, de doelen zijn behaald.",
     name: "Martijn van Esch",
     company: "DMP Heusden",
     role: "Fractievoorzitter DMP",
@@ -56,17 +56,104 @@ const testimonials = [
   }
 ];
 
-function TestimonialCard({ testimonial }) {
+// Modal Component
+function TestimonialModal({ testimonial, isOpen, onClose }) {
+  if (!isOpen || !testimonial) return null;
+
   return (
-    // Added pb-2 to wrapper to help with shadow rendering
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/50 backdrop-blur-sm"
+          onClick={onClose}
+        >
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.9, opacity: 0 }}
+            transition={{ type: "spring", duration: 0.5 }}
+            className="relative max-w-2xl w-full bg-white rounded-2xl shadow-2xl max-h-[85vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button */}
+            <button
+              onClick={onClose}
+              className="absolute top-4 right-4 z-10 p-2 bg-white/90 backdrop-blur-sm rounded-full hover:bg-white transition-colors shadow-lg border border-gray-200"
+              aria-label="Sluit review"
+            >
+              <X className="w-5 h-5 text-gray-900" />
+            </button>
+
+            {/* Content */}
+            <div className="p-6 sm:p-8">
+              {/* Header with Image */}
+              <div className="flex items-start gap-4 mb-6">
+                <img
+                  src={testimonial.image}
+                  alt={`${testimonial.name} - ${testimonial.role}`}
+                  className="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover border-2 border-blue-200 shadow-md flex-shrink-0"
+                />
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-1">
+                    {testimonial.name}
+                  </h3>
+                  <p className="text-sm text-gray-600 mb-2">
+                    {testimonial.role} • <span className="text-blue-600 font-medium">{testimonial.company}</span>
+                  </p>
+                  
+                  {/* Star Rating */}
+                  <div className="flex gap-0.5 mb-3">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+                    ))}
+                  </div>
+
+                  {/* Results Badge */}
+                  {testimonial.results && (
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-50 rounded-lg border border-blue-200">
+                      <TrendingUp className="w-4 h-4 text-blue-600 flex-shrink-0" />
+                      <span className="text-xs font-semibold text-blue-600">
+                        {testimonial.results}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Full Review Text */}
+              <div className="prose prose-gray max-w-none">
+                <div className="relative">
+                  <Quote className="absolute -top-2 -left-2 w-8 h-8 text-blue-100" />
+                  <p className="text-gray-700 leading-relaxed pl-6">
+                    {testimonial.quote}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
+// Card Component
+function TestimonialCard({ testimonial, onClick }) {
+  return (
     <div className="inline-block w-[550px] flex-shrink-0 mx-4 pb-2">
-      <div className="h-[240px] p-8 rounded-2xl bg-white border border-gray-200 shadow-lg flex flex-row gap-8 items-center">
+      <div 
+        className="h-[240px] p-8 rounded-2xl bg-white border border-gray-200 shadow-lg flex flex-row gap-8 items-center cursor-pointer transition-all duration-300 hover:shadow-xl hover:border-blue-300 hover:scale-[1.02] group"
+        onClick={onClick}
+      >
         {/* Left: Avatar */}
         <div className="flex-shrink-0">
           <img
             src={testimonial.image}
-            alt={`${testimonial.name} - ${testimonial.role} bij ${testimonial.company}, tevreden klant van Berk Visuals videoproductie`}
-            className="w-20 h-20 rounded-full object-cover border-2 border-blue-200 shadow-md"
+            alt={`${testimonial.name} - ${testimonial.role}`}
+            className="w-20 h-20 rounded-full object-cover border-2 border-blue-200 shadow-md group-hover:border-blue-400 transition-colors"
             loading="lazy"
           />
         </div>
@@ -78,6 +165,8 @@ function TestimonialCard({ testimonial }) {
               <Star key={i} className="w-3.5 h-3.5 text-yellow-400 fill-yellow-400" />
             ))}
           </div>
+          
+          {/* Truncated Quote with line-clamp */}
           <p className="text-gray-700 leading-relaxed text-sm mb-4 line-clamp-3">
             "{testimonial.quote}"
           </p>
@@ -93,9 +182,18 @@ function TestimonialCard({ testimonial }) {
             </div>
           )}
           
+          {/* Author Info */}
           <div>
             <p className="font-semibold text-gray-900 text-sm">{testimonial.name}</p>
-            <p className="text-xs text-gray-500">{testimonial.role} • <span className="text-blue-600 font-medium">{testimonial.company}</span></p>
+            <p className="text-xs text-gray-500">
+              {testimonial.role} • <span className="text-blue-600 font-medium">{testimonial.company}</span>
+            </p>
+          </div>
+
+          {/* Read More Indicator */}
+          <div className="mt-2 flex items-center gap-1 text-blue-600 text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+            <span>Lees volledige review</span>
+            <ArrowRight className="w-3 h-3" />
           </div>
         </div>
       </div>
@@ -104,6 +202,8 @@ function TestimonialCard({ testimonial }) {
 }
 
 export default function TestimonialsSection() {
+  const [selectedTestimonial, setSelectedTestimonial] = useState(null);
+
   // Triple the testimonials for seamless infinite loop
   const infiniteTestimonials = [...testimonials, ...testimonials, ...testimonials];
 
@@ -133,13 +233,12 @@ export default function TestimonialsSection() {
           </p>
         </motion.div>
 
-        {/* Auto-scrolling Marquee - FIXED SHADOW CLIPPING */}
-        {/* Added py-12 to create vertical space inside the overflow container so shadows are visible */}
+        {/* Auto-scrolling Marquee with Clickable Cards */}
         <div className="relative overflow-hidden py-12">
           <motion.div
             className="flex gap-0"
             animate={{
-              x: [0, -1 * (testimonials.length * 582)], // 550px width + 32px margin
+              x: [0, -1 * (testimonials.length * 582)],
             }}
             transition={{
               x: {
@@ -156,7 +255,8 @@ export default function TestimonialsSection() {
             {infiniteTestimonials.map((testimonial, index) => (
               <TestimonialCard 
                 key={`${testimonial.id}-${index}`} 
-                testimonial={testimonial} 
+                testimonial={testimonial}
+                onClick={() => setSelectedTestimonial(testimonial)}
               />
             ))}
           </motion.div>
@@ -209,6 +309,13 @@ export default function TestimonialsSection() {
           </Button>
         </motion.div>
       </div>
+
+      {/* Testimonial Modal */}
+      <TestimonialModal 
+        testimonial={selectedTestimonial}
+        isOpen={!!selectedTestimonial}
+        onClose={() => setSelectedTestimonial(null)}
+      />
     </section>
   );
 }
