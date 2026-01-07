@@ -147,11 +147,11 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[#0A0A0A] text-white overflow-x-hidden">
       <HeroSection />
+      <AboutSection />
       <ProblemSection />
       <SolutionSection />
       <PortfolioSection />
       <TestimonialsSection />
-      <AboutSection />
       <FooterCTA />
     </div>
   );
