@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import HeroSection from '@/components/home/HeroSection';
 import ProblemSection from '@/components/home/ProblemSection';
+import QuizSection from '@/components/home/QuizSection';
 import SolutionSection from '@/components/home/SolutionSection';
 import PortfolioSection from '@/components/home/PortfolioSection';
 import TestimonialsSection from '@/components/home/TestimonialsSection';
@@ -48,7 +49,7 @@ export default function Home() {
     setMetaProperty('og:description', 'Professionele video content voor MKB in Heusden. Van TikTok tot YouTube Shorts - wij maken video\'s die écht bekeken worden. 1M+ weergaven, 100+ video\'s geproduceerd.');
     setMetaProperty('og:type', 'website');
     setMetaProperty('og:url', 'https://berkvisuals.nl');
-    setMetaProperty('og:image', 'https://i.postimg.cc/DzNyKXPj/video-camera-2806-(2).png');
+    setMetaProperty('og:image', 'https://i.postimg.cc/sgFvPPHL/1.png');
     setMetaProperty('og:locale', 'nl_NL');
     setMetaProperty('og:site_name', 'Berk Visuals');
     
@@ -56,7 +57,7 @@ export default function Home() {
     setMetaTag('twitter:card', 'summary_large_image');
     setMetaTag('twitter:title', 'Berk Visuals - Video Content Specialist Heusden');
     setMetaTag('twitter:description', 'Professionele short-form video productie voor MKB. TikTok, Reels, Shorts - content die converteert.');
-    setMetaTag('twitter:image', 'https://i.postimg.cc/DzNyKXPj/video-camera-2806-(2).png');
+    setMetaTag('twitter:image', 'https://i.postimg.cc/sgFvPPHL/1.png');
 
     // Schema.org JSON-LD markup
     const schemaOrganization = {
@@ -64,7 +65,7 @@ export default function Home() {
       "@type": "Organization",
       "name": "Berk Visuals",
       "url": "https://berkvisuals.nl",
-      "logo": "https://i.postimg.cc/DzNyKXPj/video-camera-2806-(2).png",
+      "logo": "https://i.postimg.cc/sgFvPPHL/1.png",
       "description": "Professionele videoproductie voor MKB-bedrijven in regio Heusden. Specialist in short-form content voor TikTok, Instagram Reels en YouTube Shorts.",
       "founder": {
         "@type": "Person",
@@ -122,7 +123,7 @@ export default function Home() {
       "@type": "VideoObject",
       "name": "Berk Visuals - Short-form Video Content Showcase",
       "description": "Verticale video content voorbeelden van Berk Visuals voor MKB-bedrijven in Heusden",
-      "thumbnailUrl": "https://i.postimg.cc/DzNyKXPj/video-camera-2806-(2).png",
+      "thumbnailUrl": "https://i.postimg.cc/sgFvPPHL/1.png",
       "uploadDate": "2025-01-01",
       "contentUrl": "https://berkvisuals.nl",
       "embedUrl": "https://www.youtube.com/embed/RWpABvPCnmM"
@@ -150,6 +151,7 @@ export default function Home() {
       <HeroSection />
       <AboutSection />
       <ProblemSection />
+      <QuizSection />
       <SolutionSection />
       <PortfolioSection />
       <TestimonialsSection />
