@@ -156,24 +156,7 @@ export default function FAQSection() {
           ))}
         </div>
 
-        {/* CTA at bottom */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-12 sm:mt-16 text-center p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-blue-50 to-cyan-50 border border-blue-200"
-        >
-          <p className="text-gray-900 text-base sm:text-lg mb-4">
-            <span className="font-semibold">Nog vragen?</span> Plan een gratis en vrijblijvende intake.
-          </p>
-          <button
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-xl shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 transition-all text-sm sm:text-base"
-          >
-            Neem contact op
-          </button>
-        </motion.div>
+
       </div>
     </section>
   );
