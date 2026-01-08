@@ -3,9 +3,10 @@ import HeroSection from '@/components/home/HeroSection';
 import ProblemSection from '@/components/home/ProblemSection';
 import SolutionSection from '@/components/home/SolutionSection';
 import PortfolioSection from '@/components/home/PortfolioSection';
-import FAQSection from '@/components/home/FAQSection';
 import TestimonialsSection from '@/components/home/TestimonialsSection';
 import AboutSection from '@/components/home/AboutSection';
+import PricingSection from '@/components/home/PricingSection';
+import FAQSection from '@/components/home/FAQSection';
 import FooterCTA from '@/components/home/FooterCTA';
 
 export default function Home() {
@@ -153,6 +154,8 @@ export default function Home() {
       <SolutionSection />
       <PortfolioSection />
       <TestimonialsSection />
+      <PricingSection />
+      <FAQSection />
       <FooterCTA />
     </div>
   );
