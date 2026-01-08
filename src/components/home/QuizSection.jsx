@@ -99,29 +99,97 @@ export default function QuizSection() {
     }
   };
 
-  const calculateResult = () => {
+const calculateResult = () => {
+    // We halen de specifieke antwoorden op. 
+    // Let op: controleer of deze indexen matchen met de volgorde van je vragen!
+    // Vraag 1 = Doelgroep (Index 0)
+    // Vraag 2 = Tijd (Index 1)
+    // Vraag 3 = Ideeën/Scripts (Index 2)
+    // Vraag 4 = Camera Comfort (Index 3)
+    // Vraag 5 = Consistentie (Index 4)
+
+    // In jouw puntentelling is '3' waarschijnlijk het 'negatieve' antwoord (Nee/Weinig)
+    const hasNoTime = answers[1] === 3;       
+    const hasNoIdeas = answers[2] === 3;      
+    const isCameraShy = answers[3] === 3;     
+    const isInconsistent = answers[4] === 3;
+    
+    // Bereken totaalscore voor de algemene gevallen
     const totalScore = answers.reduce((sum, points) => sum + points, 0);
     const maxScore = questions.reduce((sum, q) => sum + Math.max(...q.options.map(o => o.points)), 0);
     const percentage = (totalScore / maxScore) * 100;
 
-    // Check if they answered "no" to time question (question 2, index 1)
-    const hasNoTime = answers[1] === 3;
+    // --- DE 6 PROFIELEN ---
 
-    if (hasNoTime || percentage < 50) {
+    // 1. De Drukke Ondernemer (De "Ik heb geen tijd" klant)
+    // Dit is vaak je meest waardevolle klant voor volledige ontzorging.
+    if (hasNoTime) {
       return {
-        type: 'outsource',
-        title: 'Je hebt potentie, maar mist tijd! 🚀',
-        description: 'Geen zorgen – uitbesteden is jouw beste optie. Ik neem het volledig uit handen: van scripting tot montage én plaatsing. Jij focust op ondernemen, ik zorg voor je content.',
-        emoji: '💡'
-      };
-    } else {
-      return {
-        type: 'ready',
-        title: 'Je bent er klaar voor! 🎬',
-        description: 'Je hebt al een goede basis, maar wil je content naar bioscoop-kwaliteit tillen? Met mijn expertise in storytelling, editing en strategie maken we samen content die écht converteert.',
-        emoji: '⭐'
+        type: 'unburden',
+        title: 'De Drukke Ondernemer 🚀',
+        description: 'Je business loopt als een trein, maar je agenda zit bomvol. Videomarketing erbij doen? Geen kans. Mijn "Full-Service Abonnement" is voor jou gemaakt: ik regel alles. Van script tot plaatsing. Jij investeert 2 uur, ik regel content voor de hele maand.',
+        emoji: '⏳',
+        cta: 'Bekijk Full-Service opties'
       };
     }
+
+    // 2. De Verborgen Expert (Wel tijd, maar durft niet)
+    // Deze klant heeft coaching en geruststelling nodig.
+    if (isCameraShy) {
+      return {
+        type: 'comfort',
+        title: 'De Verborgen Expert 💎',
+        description: 'Je hebt bakken met kennis, maar die camera voelt als een vijand. Zonde! 90% van mijn klanten vindt het spannend. Mijn kracht is regie: ik sleep je erdoorheen, shot voor shot. Geen ongemakkelijke stiltes, maar krachtige content waarin jij zelfverzekerd overkomt.',
+        emoji: '🎥',
+        cta: 'Help mij over de drempel'
+      };
+    }
+
+    // 3. De Visie-Bouwer (Wel tijd/durf, geen inspiratie)
+    // Deze klant heeft strategie nodig.
+    if (hasNoIdeas) {
+      return {
+        type: 'strategy',
+        title: 'De Visie-Bouwer 🧠',
+        description: 'Je wilt wel, maar je blijft staren naar een leeg papier. "Wat moet ik vertellen?" Laten we samen zitten voor een strategie-sessie. Ik vertaal jouw vakkennis naar kant-en-klare scripts die jouw doelgroep direct aanspreken. Nooit meer inspiratieloos.',
+        emoji: '💡',
+        cta: 'Plan een strategie-sessie'
+      };
+    }
+
+    // 4. De "Soms Wel, Soms Niet" Poster (Wel ideeën, geen regelmaat)
+    // Deze klant heeft een stok achter de deur (abonnement) nodig.
+    if (isInconsistent) {
+      return {
+        type: 'consistency',
+        title: 'De "Soms Wel, Soms Niet" Poster 📉',
+        description: 'Je post wel eens iets, maar er zit geen lijn in. Het algoritme (en je klant) houdt van regelmaat. Met mijn werkwijze "batchen" we je content: we nemen in één keer alles op, zodat jij wekenlang consistent zichtbaar bent zonder dagelijkse stress.',
+        emoji: '🗓️',
+        cta: 'Creëer consistentie'
+      };
+    }
+
+    // 5. De Enthousiaste Starter (Laag totaal, maar wil wel)
+    // Heeft op veel dingen 'Nee' geantwoord, moet aan de hand genomen worden.
+    if (percentage < 50) {
+      return {
+        type: 'kickstart',
+        title: 'De Enthousiaste Starter 🌱',
+        description: 'Je ziet de kansen van video, maar weet niet waar je moet beginnen. Geen probleem. We beginnen bij de basis: wie is je klant en wat wil je bereiken? Ik help je van A tot Z om je eerste professionele videoreeks neer te zetten.',
+        emoji: '🚀',
+        cta: 'Start mijn video-reis'
+      };
+    }
+
+    // 6. De Market Leader (Hoge score: alles op orde, wil alleen beter)
+    // Dit is de klant die wil opschalen naar topkwaliteit.
+    return {
+      type: 'scale',
+      title: 'Klaar voor de Top! ⭐',
+      description: 'Je hebt de basis staan: je hebt tijd, ideeën en durf. Nu is het tijd voor de next level. Laten we je content upgraden naar "Netflix-kwaliteit" met professionele belichting, strakke edits en datagedreven optimalisatie voor maximaal bereik.',
+      emoji: '📈',
+      cta: 'Upgrade naar Pro-kwaliteit'
+    };
   };
 
   const resetQuiz = () => {
