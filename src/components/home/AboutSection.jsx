@@ -252,7 +252,7 @@ export default function AboutSection() {
         >
           <div className="max-w-3xl mx-auto mb-12">
             <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Mijn Reis
+              Mijn reis
             </h3>
             <p className="text-gray-600 text-lg mb-8">
               Van start tot nu - ontdek hoe Berk Visuals is gegroeid tot een 
