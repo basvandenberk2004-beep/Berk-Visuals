@@ -11,50 +11,14 @@ const stats = [
 
 const timelineData = [
   {
-    title: "2020",
+    title: "2016",
     content: (
       <div>
-        <p className="text-neutral-800 text-xs md:text-sm font-normal mb-8">
-          De start van Berk Visuals. Begonnen met het filmen van lokale evenementen 
-          en kleine bedrijven in de regio. Hier leerde ik de basis van videoproductie 
-          en het vertellen van verhalen door middel van video.
+        <h4 className="text-lg font-bold mb-2 text-gray-900">De 'Enzo Knol' Droom</h4>
+        <p className="text-neutral-700 text-sm md:text-base font-normal">
+          Het begon op mijn slaapkamer: YouTube video's maken met één doel: de nieuwe Enzo Knol worden. 
+          De droom veranderde, maar de liefde voor camera's en editten was geboren.
         </p>
-        <div className="grid grid-cols-2 gap-4">
-          <img
-            src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=500&h=300&fit=crop"
-            alt="Eerste projecten"
-            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow"
-          />
-          <img
-            src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=500&h=300&fit=crop"
-            alt="Videoproductie setup"
-            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow"
-          />
-        </div>
-      </div>
-    ),
-  },
-  {
-    title: "2021",
-    content: (
-      <div>
-        <p className="text-neutral-800 text-xs md:text-sm font-normal mb-8">
-          Uitbreiding van diensten naar social media content en bedrijfsfilms. 
-          Investering in professionele apparatuur en het opbouwen van een portfolio 
-          met diverse MKB-klanten.
-        </p>
-        <div className="grid grid-cols-2 gap-4">
-          <img
-            src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=500&h=300&fit=crop"
-            alt="Social media content"
-            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow"
-          />
-          <img
-            src="https://images.unsplash.com/photo-1556656793-08538906a9f8?w=500&h=300&fit=crop"
-            alt="Bedrijfsfilm opname"
-            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow"
-          />
-        </div>
       </div>
     ),
   },
@@ -62,47 +26,10 @@ const timelineData = [
     title: "2022",
     content: (
       <div>
-        <p className="text-neutral-800 text-xs md:text-sm font-normal mb-8">
-          Focus op storytelling en branding voor ondernemers. Ontwikkeling van 
-          complete video-strategieën voor klanten, van concept tot distributie. 
-          Samenwerking met verschillende marketing bureaus.
+        <h4 className="text-lg font-bold mb-2 text-gray-900">Viraal met 'Ut_vierde'</h4>
+        <p className="text-neutral-700 text-sm md:text-base font-normal mb-4">
+          Het kanaal voor ons vriendenteam liep uit de hand: <strong>3 miljoen weergaven</strong> en een sponsorcontract met EasyToys. Hier leerde ik wat écht scoort op social media.
         </p>
-        <div className="grid grid-cols-2 gap-4">
-          <img
-            src="https://images.unsplash.com/photo-1551818255-e6e10975bc17?w=500&h=300&fit=crop"
-            alt="Storytelling project"
-            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow"
-          />
-          <img
-            src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=500&h=300&fit=crop"
-            alt="Team samenwerking"
-            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow"
-          />
-        </div>
-      </div>
-    ),
-  },
-  {
-    title: "2023",
-    content: (
-      <div>
-        <p className="text-neutral-800 text-xs md:text-sm font-normal mb-8">
-          Specialisatie in het MKB-segment met focus op authentieke en persoonlijke 
-          verhalen. Introductie van drone-opnames en geavanceerde post-productie. 
-          Meer dan 50 tevreden klanten geholpen met hun video content.
-        </p>
-        <div className="grid grid-cols-2 gap-4">
-          <img
-            src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=500&h=300&fit=crop"
-            alt="Drone opname"
-            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow"
-          />
-          <img
-            src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=500&h=300&fit=crop"
-            alt="MKB klanten"
-            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow"
-          />
-        </div>
       </div>
     ),
   },
@@ -110,23 +37,69 @@ const timelineData = [
     title: "2024",
     content: (
       <div>
-        <p className="text-neutral-800 text-xs md:text-sm font-normal mb-8">
-          Lancering van nieuwe diensten zoals video podcasts en live streaming. 
-          Uitbreiding van het netwerk en partnerships met diverse ondernemers. 
-          Berk Visuals staat nu bekend als betrouwbare partner voor videoproductie 
-          in het MKB.
+        <h4 className="text-lg font-bold mb-2 text-gray-900">150.000 views per maand</h4>
+        <p className="text-neutral-700 text-sm md:text-base font-normal mb-4">
+          Als bestuurslid communicatie bij de voetbalvereniging paste ik mijn kennis toe. Resultaat: maandelijkse viral cijfers. 
+          Tegelijkertijd begon ik als bijbaan bedrijven te helpen met content.
         </p>
-        <div className="grid grid-cols-2 gap-4">
-          <img
-            src="https://images.unsplash.com/photo-1590650153855-d9e808231d41?w=500&h=300&fit=crop"
-            alt="Podcast opname"
-            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow"
-          />
-          <img
-            src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=500&h=300&fit=crop"
-            alt="Succes"
-            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow"
-          />
+      </div>
+    ),
+  },
+  {
+    title: "Juni 2025",
+    content: (
+      <div>
+        <h4 className="text-lg font-bold mb-2 text-gray-900">De Eerste Officiële Opdracht 🤝</h4>
+        <p className="text-neutral-700 text-sm md:text-base font-normal mb-4">
+          De sprong in het diepe! Mijn eerste full-time opdracht als zelfstandige. Geen hobby meer, maar pure focus op resultaat voor de klant.
+        </p>
+        <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-md mb-4">
+           <img 
+             src="https://images.unsplash.com/photo-1605648916361-9bc12ad6a569?q=80&w=800&auto=format&fit=crop" 
+             alt="Eerste shoot op locatie" 
+             className="object-cover w-full h-full hover:scale-105 transition-transform duration-500"
+           />
+        </div>
+      </div>
+    ),
+  },
+  {
+    title: "Nov 2025",
+    content: (
+      <div>
+        <h4 className="text-lg font-bold mb-2 text-gray-900">Mijlpaal: 10+ Klanten 🎉</h4>
+        <p className="text-neutral-700 text-sm md:text-base font-normal mb-4">
+          Wat begon als een gok, werd een bewezen concept. In nog geen half jaar tijd mocht ik alweer de 10e ondernemer verwelkomen. Van sportschool tot industrie: de 'Berk Visuals' aanpak werkt.
+        </p>
+        <div className="grid grid-cols-2 gap-2 mb-4">
+           <img 
+             src="https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=400&auto=format&fit=crop" 
+             alt="Resultaat bespreking" 
+             className="rounded-lg object-cover h-24 w-full shadow-sm"
+           />
+           <img 
+             src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=400&auto=format&fit=crop" 
+             alt="Content creatie in actie" 
+             className="rounded-lg object-cover h-24 w-full shadow-sm"
+           />
+        </div>
+      </div>
+    ),
+  },
+  {
+    title: "Jan 2026",
+    content: (
+      <div>
+        <h4 className="text-lg font-bold mb-2 text-gray-900">Terug naar de Club ❤️</h4>
+        <p className="text-neutral-700 text-sm md:text-base font-normal mb-4">
+          Cirkel rond: mijn eerste professionele opdracht voor een vereniging. Waar het als vrijwilliger begon, help ik clubs nu professioneel om leden en vrijwilligers te werven met video.
+        </p>
+        <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-md">
+           <img 
+             src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=800&auto=format&fit=crop" 
+             alt="Videoproductie voor vereniging" 
+             className="object-cover w-full h-full hover:scale-105 transition-transform duration-500"
+           />
         </div>
       </div>
     ),
