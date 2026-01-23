@@ -29,7 +29,7 @@ const portfolioItems = [
     type: "Corporate & Recruitment",
     platform: "youtube",
     thumbnail: "https://www.werkenbijspie.nl/Thumbs/500/500/75/Crop/CmsData/images/SPIE/40.jpg",
-    youtubeUrl: "https://www.youtube.com/embed/Haenlsjauiw?si=ASYMc5yVzWlEVYN7",
+    youtubeUrl: "https://www.youtube.com/embed/lAs_rD8OFuM",
     description: "Van standaard wit naar opvallend goud. Een visuele vertaling van de wervingsboodschap 'Jij bent goud waard'. Branding die letterlijk schittert.",
     detailedDescription: "Hoe maak je technische dienstverlening aantrekkelijk voor nieuw personeel? Door vakmanschap visueel te maken. Voor SPIE en Vermeulen & Vermeulen legden we het wrappen van deze auto vast.\n\nDe boodschap 'Jij bent goud waard' werd letterlijk vertaald naar de auto. Dit soort 'satisfying' content houdt de kijker vast door de transformatie te tonen, terwijl de wervingsboodschap subtiel maar krachtig binnenkomt.\n\nResultaat: Een unieke eyecatcher op de weg én op social media.",
     stats: "Viral Employer Branding",
