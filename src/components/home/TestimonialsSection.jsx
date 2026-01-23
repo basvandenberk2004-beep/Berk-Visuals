@@ -38,7 +38,7 @@ const testimonials = [
     id: 4,
     quote: "Ik heb bij Bas een videoproductie afgenomen. Ik ben ontzettend blij met het resultaat. Bas is erg goed in de omgang, snapte gelijk wat ik wil en ondersteunt me op een rustig en juiste manier om mijn verhaal over te brengen in de video. Echt een aanrader!",
     name: "Kyan Cordes",
-    company: "Kyan Automatisering",
+    company: "NOVAITEC",
     role: "Ondernemer",
     image: "https://i.postimg.cc/sfYgyxpk/1725528134969.jpg",
     rating: 5,
